@@ -1,8 +1,8 @@
 version: '3.4'
 services:
   jira:
-    image: haxqer/jira:9.4.0
-    container_name: jira-srv
+    image: dongjak/jira:latest
+    container_name: jira
     environment:
       - TZ=Asia/Shanghai
 #      - JVM_MINIMUM_MEMORY=1g
@@ -13,35 +13,30 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - home_data:/var/jira
+      - ./jira_home_data:/var/jira
+      - ./server.xml:/opt/jira/conf/server.xml
     restart: always
     networks:
-      - network-bridge
+      - jira
 
   mysql:
     image: mysql:8
-    container_name: mysql-jira
+    container_name: jira-db
     environment:
       - TZ=Asia/Shanghai
       - MYSQL_DATABASE=jira
-      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_ROOT_PASSWORD=123394
       - MYSQL_USER=jira
-      - MYSQL_PASSWORD=123123
+      - MYSQL_PASSWORD=123394
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin']
 #    ports:
 #      - "13306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - ./jira_mysql_data:/var/lib/mysql
     restart: always
     networks:
-      - network-bridge
+      - jira
 
 networks:
-  network-bridge:
+  jira:
     driver: bridge
-
-volumes:
-  home_data:
-    external: false
-  mysql_data:
-    external: false
