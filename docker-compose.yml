@@ -3,6 +3,7 @@ services:
   jira:
     image: dongjak/jira:latest
     container_name: jira
+    user: "0"
     environment:
       - TZ=Asia/Shanghai
 #      - JVM_MINIMUM_MEMORY=1g
@@ -13,7 +14,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./jira_home_data/_data:/var/jira
+      - ./jira:/var/jira
       - ./server.xml:/opt/jira/conf/server.xml
     restart: always
     networks:
@@ -32,7 +33,7 @@ services:
 #    ports:
 #      - "13306:3306"
     volumes:
-      - ./jira_mysql_data/_data:/var/lib/mysql
+      - ./mysql:/var/lib/mysql
     restart: always
     networks:
       - jira
