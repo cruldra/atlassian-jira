@@ -16,7 +16,7 @@ services:
       - "9900:8080"
     volumes:
       - ./data/jira:/var/jira
-      - ./server.xml:/opt/jira/conf/server.xml
+#      - ./server.xml:/opt/jira/conf/server.xml
     restart: always
 
   db:
