@@ -1,13 +1,15 @@
 version: '3.4'
 services:
   jira:
-    image: dongjak/jira:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: jira
     environment:
       - TZ=Asia/Shanghai
-#      - JVM_MINIMUM_MEMORY=1g
-#      - JVM_MAXIMUM_MEMORY=12g
-#      - JVM_CODE_CACHE_ARGS='-XX:InitialCodeCacheSize=1g -XX:ReservedCodeCacheSize=8g'
+    #      - JVM_MINIMUM_MEMORY=1g
+    #      - JVM_MAXIMUM_MEMORY=12g
+    #      - JVM_CODE_CACHE_ARGS='-XX:InitialCodeCacheSize=1g -XX:ReservedCodeCacheSize=8g'
     depends_on:
       - mysql
     ports:
@@ -28,7 +30,7 @@ services:
       - MYSQL_ROOT_PASSWORD=123394
       - MYSQL_USER=jira
       - MYSQL_PASSWORD=123394
-    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin']
+    command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin' ]
     volumes:
       - ./data/mysql:/var/lib/mysql
     restart: always
