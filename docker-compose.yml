@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.7'
 services:
   jira:
     build:
@@ -11,17 +11,15 @@ services:
     #      - JVM_MAXIMUM_MEMORY=12g
     #      - JVM_CODE_CACHE_ARGS='-XX:InitialCodeCacheSize=1g -XX:ReservedCodeCacheSize=8g'
     depends_on:
-      - mysql
+      - db
     ports:
-      - "8080:8080"
+      - "9900:8080"
     volumes:
       - ./data/jira:/var/jira
       - ./server.xml:/opt/jira/conf/server.xml
     restart: always
-    networks:
-      - jira
 
-  mysql:
+  db:
     image: mysql:8
     container_name: jira-db
     environment:
@@ -34,9 +32,3 @@ services:
     volumes:
       - ./data/mysql:/var/lib/mysql
     restart: always
-    networks:
-      - jira
-
-networks:
-  jira:
-    driver: bridge
