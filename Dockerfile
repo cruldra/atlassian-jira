@@ -1,8 +1,7 @@
-FROM openjdk:8-stretch
+FROM openjdk:11-bullseye
+LABEL maintainer="cruldra <cruldra@cruldra.com>" version="9.12.4"
 
-LABEL maintainer="cruldra <cruldra@cruldra.com>" version="9.4.1"
-
-ARG JIRA_VERSION=9.4.1
+ARG JIRA_VERSION=9.12.4
 # Production: jira-software jira-core
 ARG JIRA_PRODUCT=jira-software
 ARG AGENT_VERSION=1.3.3
