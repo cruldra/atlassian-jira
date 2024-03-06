@@ -18,8 +18,7 @@ services:
       - ./data/jira:/var/jira
       - ./server.xml:/opt/jira/conf/server.xml
     restart: always
-    networks:
-      - jira
+
   db:
     image: mysql:8.0
     container_name: jira-db
@@ -27,11 +26,9 @@ services:
       - TZ=Asia/Shanghai
       - MYSQL_DATABASE=jira
       - MYSQL_ROOT_PASSWORD=123394
+      - MYSQL_USER=jira
+      - MYSQL_PASSWORD=123394
     command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin' ]
     volumes:
       - ./data/mysql:/var/lib/mysql
     restart: always
-    networks:
-      - jira
-networks:
-  jira:
