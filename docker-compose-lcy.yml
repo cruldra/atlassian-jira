@@ -12,8 +12,6 @@ services:
     volumes:
       - ./data/jira:/var/jira
     restart: always
-    networks:
-      - network-bridge
 
   mysql:
     image: mysql:8.0
