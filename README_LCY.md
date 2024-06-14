@@ -5,9 +5,10 @@
 ```
 # 启动
 ```bash
+mkdir -p /app && \
 git clone https://github.com/cruldra/atlassian-jira.git jira && \
 cd jira && \
-docker-compose up -d
+docker-compose up -f docker-compose-lcy.yml -d [mysql|jira]
 ```
 
 # 迁移
